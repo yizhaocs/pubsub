@@ -50,7 +50,8 @@ public class PubSubPublish extends HttpServlet {
 
         Publisher publisher = null;
         try {
-            String topicId = System.getenv("PUBSUB_TOPIC");
+            //String topicId = System.getenv("PUBSUB_TOPIC");
+            String topicId = "fill-message-details";
             // create a publisher on the topic
             if (publisher == null) {
                 ProjectTopicName topicName = ProjectTopicName.newBuilder()
@@ -65,7 +66,7 @@ public class PubSubPublish extends HttpServlet {
             int count = Integer.valueOf(req.getParameter("count"));
 
             for (int i = 0; i < count; i++) {
-                String data = "data" + i + "|" + "value" + i;
+                String data = i + "|" + i + 1 + "|" + "test" + i;
                 PubsubMessage pubsubMessage = PubsubMessage.newBuilder().setData(ByteString.copyFromUtf8(data)).build();
 
                 ApiFuture<String> future = publisher.publish(pubsubMessage);
