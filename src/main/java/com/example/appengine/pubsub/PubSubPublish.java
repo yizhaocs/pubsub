@@ -16,6 +16,12 @@
 
 package com.example.appengine.pubsub;
 
+import com.google.api.core.ApiFuture;
+import com.google.api.core.ApiFutureCallback;
+import com.google.api.core.ApiFutures;
+import com.google.api.gax.core.FixedCredentialsProvider;
+import com.google.api.gax.rpc.ApiException;
+import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.ServiceOptions;
 import com.google.cloud.pubsub.v1.Publisher;
 import com.google.protobuf.ByteString;
@@ -28,43 +34,70 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
 import java.io.IOException;
 
+/**
+ * curl  "localhost:8080/pubsub/publish?count=20"
+ */
 @WebServlet(name = "Publish with PubSub", value = "/pubsub/publish")
 public class PubSubPublish extends HttpServlet {
+    private static final String JSONFILE = "/opt/opinmind/conf/credentials/adara-spore-drive-7a12bb7e0cfd.json";
 
-  @Override
-  public void doPost(HttpServletRequest req, HttpServletResponse resp)
-      throws IOException, ServletException {
-    Publisher publisher = this.publisher;
-    try {
-      String topicId = System.getenv("PUBSUB_TOPIC");
-      // create a publisher on the topic
-      if (publisher == null) {
-        ProjectTopicName topicName = ProjectTopicName.newBuilder()
-            .setProject(ServiceOptions.getDefaultProjectId())
-            .setTopic(topicId)
-            .build();
-        publisher = Publisher.newBuilder(topicName).build();
-      }
-      // construct a pubsub message from the payload
-      final String payload = req.getParameter("payload");
-      PubsubMessage pubsubMessage =
-          PubsubMessage.newBuilder().setData(ByteString.copyFromUtf8(payload)).build();
+    @Override
+    public void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws IOException, ServletException {
 
-      publisher.publish(pubsubMessage);
-      // redirect to home page
-      resp.sendRedirect("/");
-    } catch (Exception e) {
-      resp.sendError(HttpStatus.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+        Publisher publisher = null;
+        try {
+            String topicId = System.getenv("PUBSUB_TOPIC");
+            // create a publisher on the topic
+            if (publisher == null) {
+                ProjectTopicName topicName = ProjectTopicName.newBuilder()
+                        .setProject(ServiceOptions.getDefaultProjectId())
+                        .setTopic(topicId)
+                        .build();
+                GoogleCredentials credentials = GoogleCredentials.fromStream(
+                        new FileInputStream(JSONFILE));
+                publisher = Publisher.newBuilder(topicName).setCredentialsProvider(FixedCredentialsProvider.create(credentials)).build();
+            }
+            // construct a pubsub message from the payload
+            int count = Integer.valueOf(req.getParameter("count"));
+
+            for (int i = 0; i < count; i++) {
+                String data = "data" + i + "|" + "value" + i;
+                PubsubMessage pubsubMessage = PubsubMessage.newBuilder().setData(ByteString.copyFromUtf8(data)).build();
+
+                ApiFuture<String> future = publisher.publish(pubsubMessage);
+                // Add an asynchronous callback to handle success / failure
+                ApiFutures.addCallback(future, new ApiFutureCallback<String>() {
+
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        if (throwable instanceof ApiException) {
+                            ApiException apiException = ((ApiException) throwable);
+                            // details on the API exception
+                            System.out.println("apiException.getStatusCode().getCode():" + apiException.getStatusCode().getCode());
+                            System.out.println("apiException.isRetryable():" + apiException.isRetryable());
+                        }
+                        System.out.println("Error publishing message : " + data);
+                    }
+
+                    @Override
+                    public void onSuccess(String messageId) {
+                        // Once published, returns server-assigned message ids (unique within the topic)
+                        System.out.println("onSuccess with messageId:" + messageId + " , data:" + data);
+                    }
+                });
+            }
+            // redirect to home page
+            resp.sendRedirect("/");
+        } catch (Exception e) {
+            resp.sendError(HttpStatus.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+
+
     }
-  }
 
-  private Publisher publisher;
 
-  public PubSubPublish() { }
-
-  PubSubPublish(Publisher publisher) {
-    this.publisher = publisher;
-  }
 }

@@ -29,6 +29,9 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.stream.Collectors;
 
+/**
+ * curl -H "Content-Type: application/json" -i --data @sample_message.json "localhost:8080/pubsub/push?token=mytoken"
+ */
 @WebServlet(value = "/pubsub/push")
 public class PubSubPush extends HttpServlet {
 
