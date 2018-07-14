@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @SuppressWarnings("serial")
-@WebServlet(name = "helloworld", value = "/")
+@WebServlet(name = "helloworld", value = "/helloworld")
 public class HelloServlet extends HttpServlet {
 
     @Override
