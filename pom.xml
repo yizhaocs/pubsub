@@ -19,17 +19,19 @@
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
     <groupId>com.example.flexible</groupId>
-    <artifactId>appengine-pubsub</artifactId>
+    <artifactId>sporedrive-pubsub</artifactId>
+<!--
 
-    <!--
+    &lt;!&ndash;
       The parent pom defines common style checks and testing strategies for our samples.
       Removing or replacing it should not affect the execution of the samples in anyway.
-    -->
+    &ndash;&gt;
     <parent>
         <groupId>com.google.cloud.samples</groupId>
         <artifactId>shared-configuration</artifactId>
         <version>1.0.9</version>
     </parent>
+-->
 
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -73,7 +75,50 @@
                     <!-- deploy configuration -->
                 </configuration>
             </plugin>
+
+     <!--       <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>fully.qualified.MainClass</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>-->
+
+<!--
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>fully.qualified.MainClass</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id> &lt;!&ndash; this is used for inheritance merges &ndash;&gt;
+                        <phase>package</phase> &lt;!&ndash; bind to the packaging phase &ndash;&gt;
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+-->
+
         </plugins>
+
     </build>
 </project>
         <!-- [END project] -->
