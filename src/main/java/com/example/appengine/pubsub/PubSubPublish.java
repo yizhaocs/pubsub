@@ -34,6 +34,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -42,7 +43,9 @@ import java.io.IOException;
  */
 @WebServlet(name = "Publish with PubSub", value = "/pubsub/publish")
 public class PubSubPublish extends HttpServlet {
-    private static final String JSONFILE = "/opt/opinmind/conf/credentials/adara-spore-drive-7a12bb7e0cfd.json";
+    ClassLoader classLoader = getClass().getClassLoader();
+    File file = new File(classLoader.getResource("adara-spore-drive-7a12bb7e0cfd.json").getFile());
+    //private static final String JSONFILE = "/Users/yzhao/BitBucket03222018/java-docs-samples/appengine-java8/sporedrive/src/main/resources/adara-spore-drive-7a12bb7e0cfd.json";
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -59,7 +62,7 @@ public class PubSubPublish extends HttpServlet {
                         .setTopic(topicId)
                         .build();
                 GoogleCredentials credentials = GoogleCredentials.fromStream(
-                        new FileInputStream(JSONFILE));
+                        new FileInputStream(file));
                 publisher = Publisher.newBuilder(topicName).setCredentialsProvider(FixedCredentialsProvider.create(credentials)).build();
             }
             // construct a pubsub message from the payload

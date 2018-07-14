@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "adara-spore-drive",
+  "private_key_id": "7a12bb7e0cfdfe2e2a396535e2c6df578932af5f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDmctPwzb1/ofXS\n7Ez0P8wL4/aVB1jR88EOxDNce2T6+w06+f0zBvxmC7Dt76xVtwzXS6suEU/FTrGx\n8CmFtAnpdLeC7kkehmm7+HP8f7GUnQUl7fEeUx0IHMTZjEJdnqn30r9Vi3czJa7R\nO47vugPc0NzDQZjVkN3tWlfl4H3ju7mQ6tkTwPapKXl/I1Rq+ZvLipgCAzZW/8KG\nc/A3Nr3gT4ZNmeIrGRIONMcX2pSuB7d8llNWAWMDBWBLSKCWbJp+U3ut7lz1QonG\nW0jFoc3FwWuM0ys2w2WIzESfBo3jQvWOR6Xsby+QiKlkqwObkQyX6O2PzHwNojfj\ngbfbPqmbAgMBAAECggEAYOC/BomHc4OD01LxmvDC9/Cytb3r8f9WFr4WlXduYTBv\nRG7ZqbzzGHcrvys1uKcGZ+/wm6I9dcX6X8KFwiaI0DL3/rvr00BQbOwq3mhUIBTO\nmD5qUgRAvStS+d3D/JV6AKwBMZY62y6pSl6OXWtGumq3lAIcnROUqHaFYyc35Sc2\nr3/WsTwOO/C4oye3z1V5/xlmvXPJ9+kkPCpVjUG7dNcnVH1AKaod/as6wHVKqKnv\niub3MfzJIlsfy0lfjaeD9Ia2Xngax89IMHFqmU+eoBAZCbXHSAmWHsJ1iFBOZizh\nmuIugEikCS11w7DB4NcnhfAYdAg24ArEqKy3ZXX6kQKBgQD6jo8kfBoAGrzBw8T7\nNqwd6nBY4Knq1bKyza86MUZEr0iS4enTrz+1zj53Qk1AVKzJlL3zIZFJEmo7P79e\nfi+unyyNAeugsAP7NXGvfqcIlHb7vVFBQk8Sxnwr3b8Wo5YYcvKY/cuceg2odzDl\n6VODqc8IhpIj06SbC1BAhSDoeQKBgQDrdHBU4rRzVjWX0MYQg3w6CLqF+2e9aFBu\n2VTBjIUeMOaTkbRhahb39JzH6A+gzYj6VJLmUI4kCe7oz7kQ9+bTnprIwAoewXUU\n34Z5CXvovKJRdxQcsK5I0EOMyzkTTQ/tHmtKqbhNPhsMETMJi8Mx5HNQ3evw18nQ\nNw9DHU/FswKBgGKt0Lxq0AaogRzDEIpr3t+tXG/0k5c0cLuw/Ekr7OPSMQAAT4oa\nZDojL0Di8O/cKWz+0sy1tLWVthb9pU3+3qKkd/RVBEr156uBQfP/KqPbbPz6c80C\n44eeensAS2kMJmoco2UT16QaAdUOlEiIW2bocuyFq3rGuPaDPykaBXrpAoGBAL8I\n4R8uNQSjPKZpgFnjpIYdkOCmIvxdR204rfi/fz4IpPu0KysifXI+qHnVgeCRAoNA\n3VM6pqj82jdQWjI3QLQQKjuY/F0Jz2nZFezcUgl6CySXvdytSSrQtw3j0PIlAzf7\nB0gzvdIGAsHero8fM4cmeJ1zATyOiDKEicCFZrTbAoGAKOvpfp8RJ/Xkn1NZvoFt\nzY+PcjHSq1aIRitoYqXhLEdHGlHU6idt4I3Ycmd+00X291N4GOAJoAkajB2Yxqcb\nN9G4OUFbZvuODgs9XPxPGaj//UePwERVfOuvqDnd79fYSBRzubBBFUovoOKpgMfK\n9KpnTBrEV+Mn9GRhpaOeDrE=\n-----END PRIVATE KEY-----\n",
+  "client_email": "adara-spore-drive@appspot.gserviceaccount.com",
+  "client_id": "111701866397486758215",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/adara-spore-drive%40appspot.gserviceaccount.com"
+}
