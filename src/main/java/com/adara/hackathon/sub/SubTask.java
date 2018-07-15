@@ -35,6 +35,14 @@ public class SubTask implements Runnable {
         String subscriptionId = "message-worker-sub";
         Boolean turnOnBQ = true;
 
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("adara-spore-drive-ba35df9900ab.json").getFile());
+        try {
+            credentials = GoogleCredentials.fromStream(new FileInputStream(file));
+        }catch (Exception e){
+
+        }
+
         //System.out.println("start subscriber");
         //System.out.println("sub id is: " + subscriptionId);
         //System.out.println("we will write to BQ? " + turnOnBQ);

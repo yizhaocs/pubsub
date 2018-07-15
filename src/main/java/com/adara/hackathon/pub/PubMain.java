@@ -54,7 +54,7 @@ public class PubMain {
         }
 
         PubTask pubTask = new PubTask(publisher);
-        int refreshInterval = 10; // seconds
+        int refreshInterval = 1; // seconds
         thread.scheduleWithFixedDelay(pubTask, refreshInterval, refreshInterval, TimeUnit.SECONDS);
         log.info("[PubMain.init] end");
     }
