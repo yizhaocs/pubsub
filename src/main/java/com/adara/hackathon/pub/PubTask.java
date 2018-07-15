@@ -1,4 +1,4 @@
-package com.example.appengine.pubsub;
+package com.adara.hackathon.pub;
 
 import com.google.api.core.ApiFuture;
 import com.google.api.core.ApiFutureCallback;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.appengine.pubsub;
+package com.adara.hackathon.pub;
 
 
 import com.google.api.gax.core.FixedCredentialsProvider;

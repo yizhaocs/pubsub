@@ -3,6 +3,7 @@
 .settings/*
 .DS_Store
 target/*
+lib/*
 .classpath
 .project
 *.iml
