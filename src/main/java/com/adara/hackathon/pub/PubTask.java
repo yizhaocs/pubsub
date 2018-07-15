@@ -31,7 +31,7 @@ public class PubTask implements Runnable {
         // construct a pubsub message from the payload
 
         try {
-            for (int i = 0; i < 20000; i++) {
+            for (int i = 0; i < 20; i++) {
                 String data = getUnixTimeStamp() + "|" + getUnixTimeStamp() + "|" + "hostname:" + getHostName() + ", current time:" + getCurrentDateTime();
                 PubsubMessage pubsubMessage = PubsubMessage.newBuilder().setData(ByteString.copyFromUtf8(data)).build();
 
