@@ -79,7 +79,12 @@ public class Sub {
 
                     // stream the content to BQ
                     if (turnOnBQ)
-                        bqWriter.streamDataToBQ(content);
+                        try {
+                            bqWriter.streamDataToBQ(content);
+                        }catch(Exception e){
+                            // do nothing
+                            System.out.println("bqWriter.streamDataToBQ(content) error");
+                        }
                 }
             }
         } finally {
