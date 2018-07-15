@@ -112,7 +112,11 @@ public class SubTask implements Runnable {
         @Override
         public void receiveMessage(PubsubMessage message, AckReplyConsumer consumer) {
             messages.offer(message);
-            consumer.ack();
+            try {
+                consumer.ack();
+            }catch (Exception e){
+
+            }
         }
     }
 
