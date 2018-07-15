@@ -11,13 +11,10 @@ import com.google.pubsub.v1.PubsubMessage;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
-public class Sub {
-
+public class SubTask implements Runnable {
     // use the default project id
     private static String PROJECT_ID = ServiceOptions.getDefaultProjectId();
 
@@ -25,21 +22,21 @@ public class Sub {
     //private static final List<PubsubMessage> messages = new ArrayList<>();
 
     private static GoogleCredentials credentials;
-
     private BQWriter bqWriter;
-
-    public void init() throws Exception{
-        bqWriter = new BQWriter();
-        Sub();
+    public SubTask(BQWriter bqWriter){
+        this.bqWriter = bqWriter;
     }
 
-    public void destroy() throws Exception{
-    }
 
-    public void Sub() throws Exception {
+    public void run() {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("adara-spore-drive-ba35df9900ab.json").getFile());
-        credentials = GoogleCredentials.fromStream(new FileInputStream(file));
+        try {
+            credentials = GoogleCredentials.fromStream(new FileInputStream(file));
+        }catch (Exception e){
+
+        }
+
 
 
         String subscriptionId = "message-worker-sub";
@@ -80,8 +77,7 @@ public class Sub {
 
                         // stream the content to BQ
                         if (turnOnBQ)
-
-                                bqWriter.streamDataToBQ(content);
+                            bqWriter.streamDataToBQ(content);
 
                     }
                 }catch(Exception e){

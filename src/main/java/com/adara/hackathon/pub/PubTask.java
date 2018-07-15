@@ -58,9 +58,7 @@ public class PubTask implements Runnable {
         return dateFormat.format(date);
     }
 
-    public String generateRandomUuid() {
-        return java.util.UUID.randomUUID().toString();
-    }
+
 
     public static String getUnixTimeStamp(){
         return String.valueOf(System.currentTimeMillis()/1000);
