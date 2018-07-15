@@ -8,6 +8,8 @@ import com.google.cloud.pubsub.v1.Publisher;
 import com.google.protobuf.ByteString;
 import com.google.pubsub.v1.PubsubMessage;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
@@ -22,7 +24,7 @@ public class PubTask implements Runnable {
     public void run() {
         // construct a pubsub message from the payload
 
-        String data = getUnixTimeStamp() + "|" +  getUnixTimeStamp() + "|" + getCurrentDateTime();
+        String data = getUnixTimeStamp() + "|" +  getUnixTimeStamp() + "|" + "hostname:" + getHostName() + ", current time:" + getCurrentDateTime();
         PubsubMessage pubsubMessage = PubsubMessage.newBuilder().setData(ByteString.copyFromUtf8(data)).build();
 
         ApiFuture<String> future = publisher.publish(pubsubMessage);
@@ -64,6 +66,18 @@ public class PubTask implements Runnable {
         return String.valueOf(System.currentTimeMillis()/1000);
 
     }
+
+    public String getHostName() {
+        String hostname = "Unknown";
+        try {
+            InetAddress addr;
+            addr = InetAddress.getLocalHost();
+            hostname = addr.getHostName();
+        } catch (UnknownHostException ex) {
+        }
+        return hostname;
+    }
+
     public static void main(String[] args){
         System.out.println(java.util.UUID.randomUUID().toString());
     }
