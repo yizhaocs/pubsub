@@ -31,7 +31,7 @@ public class PubTask implements Runnable {
         // construct a pubsub message from the payload
 
         try {
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 2000; i++) {
                 String data = getUnixTimeStamp() + "|" + getUnixTimeStamp() + "|" + "hostname:" + getHostName() + ", current time:" + getCurrentDateTime();
                 PubsubMessage pubsubMessage = PubsubMessage.newBuilder().setData(ByteString.copyFromUtf8(data)).build();
 
@@ -48,14 +48,14 @@ public class PubTask implements Runnable {
                             //System.out.println("apiException.isRetryable():" + apiException.isRetryable());
                         }
                         //System.out.println("Error publishing message : " + data);
-                        log.info("[PubTask.run]" + "Error publishing message : " + data);
+                        //log.info("[PubTask.run]" + "Error publishing message : " + data);
                     }
 
                     @Override
                     public void onSuccess(String messageId) {
                         // Once published, returns server-assigned message ids (unique within the topic)
                         //System.out.println("onSuccess with messageId:" + messageId + " , data:" + data);
-                        log.info("[PubTask.run]" + "onSuccess with messageId:" + messageId + " , data:" + data);
+                        //log.info("[PubTask.run]" + "onSuccess with messageId:" + messageId + " , data:" + data);
                     }
                 });
             }
