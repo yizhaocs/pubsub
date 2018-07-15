@@ -32,16 +32,6 @@ public class SubTask implements Runnable {
 
 
     public void run() {
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("adara-spore-drive-ba35df9900ab.json").getFile());
-        try {
-            credentials = GoogleCredentials.fromStream(new FileInputStream(file));
-        }catch (Exception e){
-
-        }
-
-
-
         String subscriptionId = "message-worker-sub";
         Boolean turnOnBQ = true;
 
@@ -86,6 +76,7 @@ public class SubTask implements Runnable {
                 }catch(Exception e){
                     // do nothing
                     System.out.println("bqWriter.streamDataToBQ(content) error");
+                    /*
                     if (subscriber != null) {
                         subscriber.stopAsync();
                     }
@@ -97,7 +88,7 @@ public class SubTask implements Runnable {
                     System.out.println("subscriber is : " + subscriber);
 
                     subscriber.startAsync().awaitRunning();
-
+*/
                 }
             }
         } finally {

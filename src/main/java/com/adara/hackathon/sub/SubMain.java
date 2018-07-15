@@ -11,8 +11,7 @@ public class SubMain {
         bqWriter = new BQWriter();
         ScheduledExecutorService thread = Executors.newSingleThreadScheduledExecutor();
         SubTask mSubTask = new SubTask(bqWriter);
-        int refreshInterval = 10; // seconds
-        thread.scheduleWithFixedDelay(mSubTask, refreshInterval, refreshInterval, TimeUnit.SECONDS);
+        thread.submit(mSubTask);
     }
 
     public void destroy() throws Exception{
