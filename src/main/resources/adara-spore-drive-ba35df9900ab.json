@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "adara-spore-drive",
+  "private_key_id": "ba35df9900ab5045170733d0405389e61cb670d1",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC2406PUPCOYouz\n259tcO5f9qZ2bwIY+c2f2BMd9zEpAwdJZEOYdi9FFpYZGWlStL8T2Q1f6cVIK4Y0\nP7k+krdvFrgLvQU5Jachjf0VNtQPCx9nbUQIf/ubW0m5FxqjhYcVfbAY7CWdGBS4\n6DSKwdvkJkd8+v3G0TllHtaqthvjurjJT5strsLd9Wl5rxfC7sJJnP74XSoQQBLO\nv41RtbOvdhqRdiZUBdu1ZKm3cIPomBhNqzYZ2Akwk56wtD1oHIpL40vNivTesW3U\n6nJ7Up+fmWoPGMGTiZ0qFGGAEHBe75oXPt37ctn/ZXnQjcTCaXyw5xb6j2sirnI+\n5o5z/YwNAgMBAAECggEABR1d9OpzEnsADt4isHQFk/UjxPvSx7GzcKJ22meE3kbs\nPRRgQuh0kaPm5mR3Cm3tSsKkZJ0hkXn3eAjw3Hv27v+S0xqMsFifZXQBSBwZ7yJv\nqjv8je5NB5Rp1JLTAbq6GJLvdKr6BvwwQYGWTUEhrgOXYTqVvqna8eXcZAwmwzDJ\nYA9DkRnA/vD3NorJN0qLxNYwYHQF8VDvEO2xx+9YGXzeQy85keR7KSgx56ficaW3\nNL/yzlyr7ox07XfoR9Kd2vUAAaPwC+x64FmL9Y0EV+hWFRBr7MNZHGgolacSfcin\n3u9RWVO9gWdGv9hDWjfVdHloFCnmJs/+4OBkQEqj0wKBgQDah2F5OBS7mmIpBz02\nuMW+OZ/ukCB7tilfyu9KRcmr8WRhIpA/4ilM+B2Z5kPBvDGSE4KbFE2iyZaDoFKW\nAwppkxGQGSsuNBOW9t0ZOhSGzC9cLB8ioNplQH0FG+i3irV9LUtDNXJF0JIvzPaB\n4XJaCqg5eA1P7Ps4sE8tPAt2ywKBgQDWP2t/AGGz67+ljAdXW0BPURsiVeJBo0Wl\ndmFI2Sf4E2oySnHdcVGqy22acQnTcSr5QQEdzoMSlxNXLldmTDMoxCcyIQCJ24uj\nxTNp0OC3UgELMz2k1ce/tdPXVMTh1/RS7pS/0EGBGOdVlw/jn5hRm1jWWnKytCed\n6F1B4fHVhwKBgHIHFGihR8hAnZnVCi8EqUJCZV6hXCHRgrNWfBhgZARReFRrKaP8\nChr8mM2WZqKv5ZnYjl0Hch9QWzahsJZQTd2a/R4Y0/xO9i3e8K3aLZ3M66WH7FMw\nZeVRiirhTkR/n4YK3Wvbdp5RYAaLR9Gr5vRu/SrHpwKeoNQKw7XR0BWTAoGADz5t\n8JhfW0Tf2vCOqSmF9t7Hdnbz5UWvs+krXNqOnHkNKkzfsyjX7bYRs1Zto4y+yQNW\nB//klZMIPkC+2Tl8vl7OhyOP/T8QvXNPiCzjgEemaVyY+zx2vO48B2sxovwRl0EA\ndnFj58KU2yMnb0Owu8W42W+QD6T/2J1q3UAtS8sCgYEAtC18ZKH+68+nDkmJLaho\nBvWUdjpYlQG5re+SZcLZV1EoeuKONU4UgiOO8UdpUB5ONGh2L1gOImpmEoh1oG+u\nHLCQOC+jbwccaaCbmk8Iq/JY+zq1Ufrkr5N6gETGegYlK6MmVy/Y8Kte8ReJ1CJ5\nisDX+e3wyX+gHG4YNfp1Xe0=\n-----END PRIVATE KEY-----\n",
+  "client_email": "charlesjasonrickyyi@adara-spore-drive.iam.gserviceaccount.com",
+  "client_id": "100446378147398731139",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/charlesjasonrickyyi%40adara-spore-drive.iam.gserviceaccount.com"
+}

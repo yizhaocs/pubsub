@@ -26,17 +26,19 @@ public class Sub {
 
     private static GoogleCredentials credentials;
 
-    private static BQWriter bqWriter = new BQWriter();
+    private BQWriter bqWriter;
 
     public void init() throws Exception{
+        bqWriter = new BQWriter();
+        Sub();
     }
 
     public void destroy() throws Exception{
     }
 
-    public Sub() throws Exception {
+    public void Sub() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("adara-spore-drive-7a12bb7e0cfd.json").getFile());
+        File file = new File(classLoader.getResource("adara-spore-drive-ba35df9900ab.json").getFile());
         credentials = GoogleCredentials.fromStream(new FileInputStream(file));
 
 
