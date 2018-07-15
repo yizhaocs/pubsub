@@ -36,7 +36,7 @@ public class BQWriter {
 
     public void streamDataToBQ(String rowString) {
         String[] rowArray = pipeSpliter.split(rowString);
-        Long cookieId = Long.valueOf(rowArray[0]);
+        Integer cookieId = Integer.valueOf(rowArray[0]);
         String key = rowArray[1];
         String value = rowArray[2];
 
@@ -50,6 +50,7 @@ public class BQWriter {
         if (response.hasErrors()) {
             // If any of the insertions failed, this lets you inspect the errors
             for (Map.Entry<Long, List<BigQueryError>> entry : response.getInsertErrors().entrySet()) {
+                System.out.println("[BQWriter.streamDataToBQ] response.hasErrors:" + entry);
                 // inspect row error
             }
         }
