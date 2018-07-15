@@ -10,8 +10,10 @@ import com.google.pubsub.v1.PubsubMessage;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Logger;
 
 public class PubTask implements Runnable {
+    private static final Logger log = Logger.getLogger(PubTask.class.getName());
     private Publisher publisher;
     public PubTask(Publisher publisher) {
         this.publisher = publisher;
@@ -36,12 +38,14 @@ public class PubTask implements Runnable {
                     System.out.println("apiException.isRetryable():" + apiException.isRetryable());
                 }
                 System.out.println("Error publishing message : " + data);
+                log.info("[PubTask.run]" + "Error publishing message : " + data);
             }
 
             @Override
             public void onSuccess(String messageId) {
                 // Once published, returns server-assigned message ids (unique within the topic)
                 System.out.println("onSuccess with messageId:" + messageId + " , data:" + data);
+                log.info("[PubTask.run]" + "onSuccess with messageId:" + messageId + " , data:" + data);
             }
         });
     }

@@ -28,14 +28,23 @@ import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 
 public class PubSubPublish {
+    private static final Logger log = Logger.getLogger(PubSubPublish.class.getName());
     ClassLoader classLoader = getClass().getClassLoader();
     File file = new File(classLoader.getResource("adara-spore-drive-7a12bb7e0cfd.json").getFile());
 
+    public void init() throws Exception{
+        runPub();
+    }
+
+    public void destroy() throws Exception{
+    }
 
     public void runPub() throws IOException{
+        log.info("[PubSubPublish.runPub] starting");
         ScheduledExecutorService thread = Executors.newSingleThreadScheduledExecutor();
         Publisher publisher = null;
 
@@ -54,6 +63,6 @@ public class PubSubPublish {
         PubTask pubTask = new PubTask(publisher);
         int refreshInterval = 10; // seconds
         thread.scheduleWithFixedDelay(pubTask, refreshInterval, refreshInterval, TimeUnit.SECONDS); //等待refreshInterval后执行mDBRefreshTask，3s后任务结束，再等待2s（间隔时间-消耗时间），如果有空余线程时，再次执行该任务
-
+        log.info("[PubSubPublish.runPub] end");
     }
 }
