@@ -20,7 +20,7 @@ public class PubTask implements Runnable {
     public void run() {
         // construct a pubsub message from the payload
 
-        String data = getUnixTimeStamp() + "|" +  generateRandomUuid() + "|" + getCurrentDateTime();
+        String data = getUnixTimeStamp() + "|" +  getUnixTimeStamp() + "|" + getCurrentDateTime();
         PubsubMessage pubsubMessage = PubsubMessage.newBuilder().setData(ByteString.copyFromUtf8(data)).build();
 
         ApiFuture<String> future = publisher.publish(pubsubMessage);
