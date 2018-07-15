@@ -50,7 +50,7 @@ public class BQWriter {
         if (response.hasErrors()) {
             // If any of the insertions failed, this lets you inspect the errors
             for (Map.Entry<Long, List<BigQueryError>> entry : response.getInsertErrors().entrySet()) {
-                System.out.println("[BQWriter.streamDataToBQ] response.hasErrors:" + entry);
+                //System.out.println("[BQWriter.streamDataToBQ] response.hasErrors:" + entry);
                 // inspect row error
             }
         }
