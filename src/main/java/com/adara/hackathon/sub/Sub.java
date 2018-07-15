@@ -70,21 +70,23 @@ public class Sub {
             subscriber.startAsync().awaitRunning();
             // Continue to listen to messages
             while (true) {
-                if (messages.size()>0) {
-                    PubsubMessage message = messages.poll();
-                    System.out.println("Message Id: " + message.getMessageId());
-                    System.out.println("Data: " + message.getData().toStringUtf8());
+                try {
+                    if (messages.size()>0) {
+                        PubsubMessage message = messages.poll();
+                        System.out.println("Message Id: " + message.getMessageId());
+                        System.out.println("Data: " + message.getData().toStringUtf8());
 
-                    String content = message.getData().toStringUtf8();
+                        String content = message.getData().toStringUtf8();
 
-                    // stream the content to BQ
-                    if (turnOnBQ)
-                        try {
-                            bqWriter.streamDataToBQ(content);
-                        }catch(Exception e){
-                            // do nothing
-                            System.out.println("bqWriter.streamDataToBQ(content) error");
-                        }
+                        // stream the content to BQ
+                        if (turnOnBQ)
+
+                                bqWriter.streamDataToBQ(content);
+
+                    }
+                }catch(Exception e){
+                    // do nothing
+                    System.out.println("bqWriter.streamDataToBQ(content) error");
                 }
             }
         } finally {
