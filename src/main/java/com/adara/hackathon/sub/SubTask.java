@@ -35,10 +35,10 @@ public class SubTask implements Runnable {
         String subscriptionId = "message-worker-sub";
         Boolean turnOnBQ = true;
 
-        System.out.println("start subscriber");
-        System.out.println("sub id is: " + subscriptionId);
-        System.out.println("we will write to BQ? " + turnOnBQ);
-        System.out.println("project id is : " + PROJECT_ID);
+        //System.out.println("start subscriber");
+        //System.out.println("sub id is: " + subscriptionId);
+        //System.out.println("we will write to BQ? " + turnOnBQ);
+        //System.out.println("project id is : " + PROJECT_ID);
         //System.out.println(System.getenv("GOOGLE_APPLICATION_CREDENTIALS"));
 
         if (PROJECT_ID == null) {
@@ -47,7 +47,7 @@ public class SubTask implements Runnable {
 
         ProjectSubscriptionName subscriptionName = ProjectSubscriptionName.of(
                 PROJECT_ID, subscriptionId);
-        System.out.println("subscriptionName is: " + subscriptionName);
+        //System.out.println("subscriptionName is: " + subscriptionName);
 
         Subscriber subscriber = null;
         try {
@@ -55,7 +55,7 @@ public class SubTask implements Runnable {
             subscriber =
                     Subscriber.newBuilder(subscriptionName, new MessageReceiverExample())
                             .setCredentialsProvider(FixedCredentialsProvider.create(credentials)).build();
-            System.out.println("subscriber is : " + subscriber);
+            //System.out.println("subscriber is : " + subscriber);
 
             subscriber.startAsync().awaitRunning();
             // Continue to listen to messages
@@ -63,8 +63,8 @@ public class SubTask implements Runnable {
                 try {
                     if (messages.size()>0) {
                         PubsubMessage message = messages.poll();
-                        System.out.println("Message Id: " + message.getMessageId());
-                        System.out.println("Data: " + message.getData().toStringUtf8());
+                        //System.out.println("Message Id: " + message.getMessageId());
+                        //System.out.println("Data: " + message.getData().toStringUtf8());
 
                         String content = message.getData().toStringUtf8();
 
@@ -75,7 +75,7 @@ public class SubTask implements Runnable {
                     }
                 }catch(Exception e){
                     // do nothing
-                    System.out.println("bqWriter.streamDataToBQ(content) error");
+                    //System.out.println("bqWriter.streamDataToBQ(content) error");
                     /*
                     if (subscriber != null) {
                         subscriber.stopAsync();
