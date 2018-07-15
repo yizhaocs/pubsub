@@ -24,32 +24,34 @@ public class PubTask implements Runnable {
     public void run() {
         // construct a pubsub message from the payload
 
-        String data = getUnixTimeStamp() + "|" +  getUnixTimeStamp() + "|" + "hostname:" + getHostName() + ", current time:" + getCurrentDateTime();
-        PubsubMessage pubsubMessage = PubsubMessage.newBuilder().setData(ByteString.copyFromUtf8(data)).build();
+        for(int i = 0; i < 10; i++) {
+            String data = getUnixTimeStamp() + "|" + getUnixTimeStamp() + "|" + "hostname:" + getHostName() + ", current time:" + getCurrentDateTime();
+            PubsubMessage pubsubMessage = PubsubMessage.newBuilder().setData(ByteString.copyFromUtf8(data)).build();
 
-        ApiFuture<String> future = publisher.publish(pubsubMessage);
-        // Add an asynchronous callback to handle success / failure
-        ApiFutures.addCallback(future, new ApiFutureCallback<String>() {
+            ApiFuture<String> future = publisher.publish(pubsubMessage);
+            // Add an asynchronous callback to handle success / failure
+            ApiFutures.addCallback(future, new ApiFutureCallback<String>() {
 
-            @Override
-            public void onFailure(Throwable throwable) {
-                if (throwable instanceof ApiException) {
-                    ApiException apiException = ((ApiException) throwable);
-                    // details on the API exception
-                    System.out.println("apiException.getStatusCode().getCode():" + apiException.getStatusCode().getCode());
-                    System.out.println("apiException.isRetryable():" + apiException.isRetryable());
+                @Override
+                public void onFailure(Throwable throwable) {
+                    if (throwable instanceof ApiException) {
+                        ApiException apiException = ((ApiException) throwable);
+                        // details on the API exception
+                        System.out.println("apiException.getStatusCode().getCode():" + apiException.getStatusCode().getCode());
+                        System.out.println("apiException.isRetryable():" + apiException.isRetryable());
+                    }
+                    System.out.println("Error publishing message : " + data);
+                    log.info("[PubTask.run]" + "Error publishing message : " + data);
                 }
-                System.out.println("Error publishing message : " + data);
-                log.info("[PubTask.run]" + "Error publishing message : " + data);
-            }
 
-            @Override
-            public void onSuccess(String messageId) {
-                // Once published, returns server-assigned message ids (unique within the topic)
-                System.out.println("onSuccess with messageId:" + messageId + " , data:" + data);
-                log.info("[PubTask.run]" + "onSuccess with messageId:" + messageId + " , data:" + data);
-            }
-        });
+                @Override
+                public void onSuccess(String messageId) {
+                    // Once published, returns server-assigned message ids (unique within the topic)
+                    System.out.println("onSuccess with messageId:" + messageId + " , data:" + data);
+                    log.info("[PubTask.run]" + "onSuccess with messageId:" + messageId + " , data:" + data);
+                }
+            });
+        }
     }
 
     private String getCurrentDateTime() {
