@@ -37,14 +37,7 @@ public class PubMain {
     File file = new File(classLoader.getResource("adara-spore-drive-7a12bb7e0cfd.json").getFile());
 
     public void init() throws Exception{
-        runPub();
-    }
-
-    public void destroy() throws Exception{
-    }
-
-    public void runPub() throws IOException{
-        log.info("[PubMain.runPub] starting");
+        log.info("[PubMain.init] starting");
         ScheduledExecutorService thread = Executors.newSingleThreadScheduledExecutor();
         Publisher publisher = null;
 
@@ -63,6 +56,9 @@ public class PubMain {
         PubTask pubTask = new PubTask(publisher);
         int refreshInterval = 10; // seconds
         thread.scheduleWithFixedDelay(pubTask, refreshInterval, refreshInterval, TimeUnit.SECONDS);
-        log.info("[PubMain.runPub] end");
+        log.info("[PubMain.init] end");
+    }
+
+    public void destroy() throws Exception{
     }
 }
