@@ -1,5 +1,6 @@
 package com.adara.hackathon.sub;
 
+import com.adara.hackathon.pub.PubMain;
 import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.ServiceOptions;
@@ -13,12 +14,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
+import java.util.logging.Logger;
 
 public class SubTask implements Runnable {
+    private static final Logger log = Logger.getLogger(SubTask.class.getName());
     // use the default project id
     private static String PROJECT_ID = ServiceOptions.getDefaultProjectId();
 
-    private static final BlockingQueue<PubsubMessage> messages = new LinkedBlockingDeque<>();
+    private static BlockingQueue<PubsubMessage> messages = new LinkedBlockingDeque<>();
     //private static final List<PubsubMessage> messages = new ArrayList<>();
 
     private static GoogleCredentials credentials;
@@ -83,6 +86,18 @@ public class SubTask implements Runnable {
                 }catch(Exception e){
                     // do nothing
                     System.out.println("bqWriter.streamDataToBQ(content) error");
+                    if (subscriber != null) {
+                        subscriber.stopAsync();
+                    }
+                    messages = new LinkedBlockingDeque<>();
+                    // create a subscriber bound to the asynchronous message receiver
+                    subscriber =
+                            Subscriber.newBuilder(subscriptionName, new MessageReceiverExample())
+                                    .setCredentialsProvider(FixedCredentialsProvider.create(credentials)).build();
+                    System.out.println("subscriber is : " + subscriber);
+
+                    subscriber.startAsync().awaitRunning();
+
                 }
             }
         } finally {
