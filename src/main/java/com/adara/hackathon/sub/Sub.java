@@ -13,39 +13,35 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 
-public class JavaSub {
+public class Sub {
 
     // use the default project id
     private static String PROJECT_ID = ServiceOptions.getDefaultProjectId();
 
-//    private static final BlockingQueue<PubsubMessage> messages = new LinkedBlockingDeque<>();
-    private static final List<PubsubMessage> messages = new ArrayList<>();
+    private static final BlockingQueue<PubsubMessage> messages = new LinkedBlockingDeque<>();
+    //private static final List<PubsubMessage> messages = new ArrayList<>();
 
     private static GoogleCredentials credentials;
 
     private static BQWriter bqWriter = new BQWriter();
 
-    public JavaSub() throws Exception {
+    public void init() throws Exception{
+    }
+
+    public void destroy() throws Exception{
+    }
+
+    public Sub() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("adara-spore-drive-2a0537ed329b.json").getFile());
+        File file = new File(classLoader.getResource("adara-spore-drive-7a12bb7e0cfd.json").getFile());
         credentials = GoogleCredentials.fromStream(new FileInputStream(file));
-    }
 
-    static class MessageReceiverExample implements MessageReceiver {
 
-        @Override
-        public void receiveMessage(PubsubMessage message, AckReplyConsumer consumer) {
-            messages.add(message);
-            consumer.ack();
-        }
-    }
-
-    /** Receive messages over a subscription. */
-    public static void main(String... args) throws Exception {
-        // set subscriber id, eg. my-sub
-        String subscriptionId = args[0];
-        Boolean turnOnBQ = "yes".equals(args[1]);
+        String subscriptionId = "message-worker-sub";
+        Boolean turnOnBQ = true;
 
         System.out.println("start subscriber");
         System.out.println("sub id is: " + subscriptionId);
@@ -73,7 +69,7 @@ public class JavaSub {
             // Continue to listen to messages
             while (true) {
                 if (messages.size()>0) {
-                    PubsubMessage message = messages.get(0);
+                    PubsubMessage message = messages.poll();
                     System.out.println("Message Id: " + message.getMessageId());
                     System.out.println("Data: " + message.getData().toStringUtf8());
 
@@ -90,4 +86,14 @@ public class JavaSub {
             }
         }
     }
+
+    static class MessageReceiverExample implements MessageReceiver {
+
+        @Override
+        public void receiveMessage(PubsubMessage message, AckReplyConsumer consumer) {
+            messages.offer(message);
+            consumer.ack();
+        }
+    }
+
 }

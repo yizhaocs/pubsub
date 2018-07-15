@@ -33,18 +33,14 @@ public class BQWriter {
         rowContent.put("key", key);
         rowContent.put("value", value);
 
-        InsertAllResponse response =
-                bigQuery.insertAll(
-                        InsertAllRequest.newBuilder(tableId)
-                                .addRow(rowContent)
+       /* InsertAllResponse response =  bigQuery.insertAll( InsertAllRequest.newBuilder(tableId).addRow(rowContent).build());
                                 // More rows can be added in the same RPC by invoking .addRow() on the builder
-                                .build());
         if (response.hasErrors()) {
             // If any of the insertions failed, this lets you inspect the errors
             for (Map.Entry<Long, List<BigQueryError>> entry : response.getInsertErrors().entrySet()) {
                 // inspect row error
             }
-        }
+        }*/
 
     }
 }
